@@ -81,16 +81,6 @@ public class HempfestClans extends JavaPlugin {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (URLParser.getJson("https://clans-startstop-messages.herokuapp.com/") != null) {
-			JsonObject startMessageObject = URLParser.getJson("https://clans-startstop-messages.herokuapp.com/");
-			String startMessage = "";
-			ArrayList<String> messages = new ArrayList<>();
-			for (int i = 0; i < startMessageObject.getAsJsonArray("startMessages").size(); i++) {
-				messages.add(startMessageObject.getAsJsonArray("startMessages").get(i).toString());
-			}
-			startMessage = messages.get(new Random().nextInt(messages.size())).replaceAll("\"", "");
-			log.info(String.format("[%s] - " + startMessage, getDescription().getName()));
-		}
 		setInstance(this);
 		dataManager.copyDefaults();
 		new Registry<>(Listener.class).source(this).pick("com.youtube.hempfest.clans.util.listener").operate(l -> getServer().getPluginManager().registerEvents(l, this));
@@ -146,16 +136,6 @@ public class HempfestClans extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		if (URLParser.getJson("https://clans-startstop-messages.herokuapp.com/") != null) {
-			JsonObject stopMessageObject = URLParser.getJson("https://clans-startstop-messages.herokuapp.com/");
-			String stopMessage = "";
-			ArrayList<String> messages = new ArrayList<>();
-			for (int i = 0; i < stopMessageObject.getAsJsonArray("stopMessages").size(); i++) {
-				messages.add(stopMessageObject.getAsJsonArray("stopMessages").get(i).toString());
-			}
-			stopMessage = messages.get(new Random().nextInt(messages.size())).replaceAll("\"", "");
-			log.info(String.format("[%s] - " + stopMessage, getDescription().getName()));
-		}
 		residents.clear();
 		idMode.clear();
 		playerClan.clear();
