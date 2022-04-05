@@ -363,8 +363,10 @@ public class ClanUtil extends StringLibrary {
 
 	public UUID getUserID(String playerName) {
 		for (OfflinePlayer op : Bukkit.getOfflinePlayers()) {
-			if (op.getName().equalsIgnoreCase(playerName)) {
-				return op.getUniqueId();
+			if (op.getName() != null) {
+				if (op.getName().equalsIgnoreCase(playerName)) {
+					return op.getUniqueId();
+				}
 			}
 		}
 		return null;
